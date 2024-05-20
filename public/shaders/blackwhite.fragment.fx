@@ -11,6 +11,15 @@ uniform sampler2D image;
 out vec4 FragColor;
 
 void main() {
-    // Color
-    FragColor = texture(image, model_uv);
+    // Fetch the texture color
+    vec4 color = texture(image, model_uv);
+    
+    // Calculate luminance
+    float luminance = 0.299 * color.r + 0.587 * color.g + 0.114 * color.b;
+    
+    // Create the grayscale color
+    vec4 grayScaleColor = vec4(luminance, luminance, luminance, 1.0);
+    
+    // Output the grayscale color
+    FragColor = grayScaleColor;
 }

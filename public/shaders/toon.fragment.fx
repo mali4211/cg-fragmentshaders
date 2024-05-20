@@ -11,6 +11,12 @@ uniform sampler2D image;
 out vec4 FragColor;
 
 void main() {
-    // Color
-    FragColor = texture(image, model_uv);
+    // Fetch the color from the texture
+    vec4 texColor = texture(image, model_uv);
+    
+    // Round each color component to one of 5 levels
+    texColor.rgb = floor(texColor.rgb * 4.0 + 0.5) / 4.0;
+
+    // Output the modified color
+    FragColor = texColor;
 }
